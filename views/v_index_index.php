@@ -1,11 +1,7 @@
 <p>
-	Hello World! You have successfully spawned a new application.
-</p>
-
-<p>
-	This message is being triggered via the c_index.php controller, within the index() method.
-</p>
-
-<p>
-	<strong>Since everything is in working order, you should now delete <?php echo APP_PATH?>diagnostics.php</strong>
+	<h1>Welcome to <?=APP_NAME?><?php if($user) echo ', '.$user->first_name; ?></h1>
+	<ul>
+    	<li><a href="http://p2.marckettler.loc/users/signup">Sign Up</a></li>
+        <li><a href="http://p2.marckettler.loc/users/login">Log In</a></li>
+    </ul>
 </p>
