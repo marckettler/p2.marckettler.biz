@@ -1,3 +1,4 @@
+<? if(isset($_GET['error'])) echo $_GET['error'];?>
 <form method='POST' action='/users/p_signup'>
 
     First Name<br>
