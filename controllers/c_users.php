@@ -22,11 +22,14 @@ class users_controller extends base_controller
 		Router::redirect("/users/profile/");
 	} #end signup post
 		
-	public function login()
+	public function login($error = NULL)
 	{
 		# Setup view
 		$this->template->content = View::instance('v_users_login');
 		$this->template->title   = "Log In";
+        $this->template->content->error = $error;
+        $client_files_head = Array("css/blooper.css");
+        $this->template->client_files_head = Utils::load_client_files($client_files_head);
 		echo $this->template;
 	} #end login
 	
@@ -42,7 +45,7 @@ class users_controller extends base_controller
 		else
 		{	
 			# Invalid loging attempt redirect to login page
-			Router::redirect("/users/login/");
+			Router::redirect("/users/login/error");
 		}		
 	} # end login post	
 		
