@@ -28,7 +28,7 @@ class users_controller extends base_controller
 		$this->template->content = View::instance('v_users_login');
 		$this->template->title   = "Log In";
         $this->template->content->error = $error;
-        $client_files_head = Array("css/blooper.css");
+        $client_files_head = Array("/css/blooper.css");
         $this->template->client_files_head = Utils::load_client_files($client_files_head);
 		echo $this->template;
 	} #end login
@@ -40,7 +40,7 @@ class users_controller extends base_controller
 		
 		if($user_token)
 		{
-			Router::redirect("/users/profile/".$this->user->first_name);
+			Router::redirect("/");
 		}
 		else
 		{	
