@@ -149,4 +149,11 @@ class users_controller extends base_controller
         # Render the view
         echo $this->template;
     }
+
+    public function unfollow($user_id_to_unfollow)
+    {
+        $cond = "WHERE user_id =".$this->user->user_id." AND user_id_followed = ".$user_id_to_unfollow;
+        DB::instance(DB_NAME)->delete('users_users', $cond );
+        Router::redirect("/users/show_all_users");
+    } # end unfollow
 } # eoc

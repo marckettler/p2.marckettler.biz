@@ -1,16 +1,12 @@
 <article class="container">
     <?php foreach($users as $user): ?>
-        <!-- Skip the currently logged in user -->
-        <?php if(!($user['user_id'] == $current_user_id)): ?>
-            <!-- Print this user's name -->
+        <?php if(!($user['user_id'] == $current_user_id)): #skip the logged in user?>
             <article class="container">
                 <div class="panel panel-default">
                     <p class="panel-body">
                         <?=$user['first_name']?> <?=$user['last_name']?>
-                        <!-- If there exists a connection with this user, show a unfollow link -->
                         <?php if(isset($connections[$user['user_id']])): ?>
                             <a href='/users/unfollow/<?=$user['user_id']?>'>Unfollow</a>
-                            <!-- Otherwise, show the follow link -->
                         <?php else: ?>
                             <a href='/users/follow/<?=$user['user_id']?>'>Follow</a>
                         <?php endif; ?>
