@@ -1,5 +1,6 @@
-<?php foreach($users as $user): ?>
-    <!-- Skip the currently logged in user -->
+<article class="container">
+    <?php foreach($users as $user): ?>
+        <!-- Skip the currently logged in user -->
         <!-- Print this user's name -->
         <?=$user['first_name']?> <?=$user['last_name']?>
 
@@ -12,4 +13,5 @@
             <a href='/users/follow/<?=$user['user_id']?>'>Follow</a>
         <?php endif; ?>
         <br><br>
-<?php endforeach; ?>
+    <?php endforeach; ?>
+</article>

@@ -1,22 +1,23 @@
-<? if(isset($_GET['error'])) echo $_GET['error'];?>
-<form method='POST' action='/users/p_signup'>
+<article class="container">
+    <form class="form-horizontal" role="form" method="POST" action="/users/p_signup">
+        <div class="form-group">
+            <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="first_name" class="form-control" id="inputFirstName" placeholder="First Name" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
+            <div class="col-sm-10">
+                <input type="text" name="last_name" class="form-control" id="inputLastName" placeholder="Last Name" required>
+            </div>
+        </div>
+        <? require_once("/views/v_common_form_inputs.php"); ?>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
+</article>
 
-    <label for 'first_name'>First Name</label>
-    <input type='text' name='first_name' required='required' >
-    <br>
-
-    <label for 'last_name'>Last Name</label>
-    <input type='text' name='last_name' required='required'>
-    <br>
-
-    <label for 'email'>Email</label>
-    <input type='email' name='email' required='required' placeholder='Enter a valid email address'>
-    <br>
-
-    <label for 'password'>Password</label>
-    <input type='password' name='password' required="required">
-    <br><br>
-
-    <input type='submit'>
-
-</form>

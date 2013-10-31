@@ -42,7 +42,6 @@
                             </li>
                             <li><a href="/users/logout">Log Out</a></li>
                         <?php else: ?>
-                            <li><a href="/users/signup">Sign Up</a></li>
                             <li><a href="/users/login">Log In</a></li>
                         <?php endif; ?>
                     </ul>
