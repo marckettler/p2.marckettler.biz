@@ -12,6 +12,7 @@ class users_controller extends base_controller
 		# Setup view
 		$this->template->content = View::instance('v_users_signup');
 		$this->template->title   = "Sign Up";
+        $this->template->content->common_form_inputs = View::instance("v_common_form_inputs");
 		# Render template
 		echo $this->template;	
 	} #end signup
@@ -25,9 +26,10 @@ class users_controller extends base_controller
 	public function login($error = NULL)
 	{
 		# Setup view
-		$this->template->content = View::instance('v_users_login');
+		$this->template->content = View::instance("v_users_login");
 		$this->template->title   = "Log In";
         $this->template->content->error = $error;
+        $this->template->content->common_form_inputs = View::instance("v_common_form_inputs");
         # Add blooper specific css
         $client_files_head = Array("/css/blooper.css");
         $this->template->client_files_head = Utils::load_client_files($client_files_head);

@@ -12,7 +12,7 @@
                 <input type="text" name="last_name" class="form-control" id="inputLastName" placeholder="Last Name" required>
             </div>
         </div>
-        <? require_once("/views/v_common_form_inputs.php"); ?>
+        <?= $common_form_inputs; ?>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
                 <button type="submit" class="btn btn-default">Sign in</button>

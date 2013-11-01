@@ -7,7 +7,7 @@
         <?
             endif;
 
-            require_once("/views/v_common_form_inputs.php");
+            echo $common_form_inputs;
         ?>
         <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
