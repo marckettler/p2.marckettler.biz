@@ -6,9 +6,9 @@
                     <p class="panel-body">
                         <?=$user['first_name']?> <?=$user['last_name']?>
                         <?php if(isset($connections[$user['user_id']])): ?>
-                            <a href='/users/unfollow/<?=$user['user_id']?>'>Unfollow</a>
+                            <a class="btn btn-primary" href='/users/unfollow/<?=$user['user_id']?>'>Unfollow</a>
                         <?php else: ?>
-                            <a href='/users/follow/<?=$user['user_id']?>'>Follow</a>
+                            <a class="btn btn-primary" href='/users/follow/<?=$user['user_id']?>'>Follow</a>
                         <?php endif; ?>
                     </p>
                 </div>

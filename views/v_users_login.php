@@ -1,7 +1,7 @@
 <article class="container">
     <form class="form-horizontal" role="form" method="POST" action="/users/p_login">
         <? if($error): ?>
-        <div class="text-center text-danger text-">
+        <div class="text-center text-danger">
             <h3>Your Login information was incorrect.</h3>
         </div>
         <?

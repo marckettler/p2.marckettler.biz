@@ -30,9 +30,6 @@ class users_controller extends base_controller
 		$this->template->title   = "Log In";
         $this->template->content->error = $error;
         $this->template->content->common_form_inputs = View::instance("v_common_form_inputs");
-        # Add blooper specific css
-        $client_files_head = Array("/css/blooper.css");
-        $this->template->client_files_head = Utils::load_client_files($client_files_head);
 		echo $this->template;
 	} #end login
 	
@@ -43,7 +40,7 @@ class users_controller extends base_controller
 		
 		if($user_token)
 		{
-			Router::redirect("/");
+			Router::redirect("/users/profile");
 		}
 		else
 		{	
@@ -72,9 +69,29 @@ class users_controller extends base_controller
 			#Setup view
 			$this->template->content = View::instance('v_users_profile');
 			$this->template->title = "Profile of ".$this->user->first_name;
+            $this->template->content->num_following = count($this->get_following());
+            $this->template->content->num_following_me = count($this->get_following_me());
 			echo $this->template;
 		}
 	} # end profile
+
+    public function edit_profile()
+    {
+        #Secure the page by redirecting users not logged in
+        if(!$this->user)
+        {
+            Router::redirect('/users/login');
+        }
+        else
+        {
+            #Setup view
+            $this->template->content = View::instance('v_users_edit_profile');
+            $this->template->title = "Profile of ".$this->user->first_name;
+            $this->template->content->num_following = count($this->get_following());
+            $this->template->content->num_following_me = count($this->get_following_me());
+            echo $this->template;
+        }
+    } # end edit_profile
 
     private function get_all_users()
     {
@@ -86,7 +103,7 @@ class users_controller extends base_controller
 
     } # end get_all_users
 
-    private function get_followers()
+    private function get_following()
     {
         # Build the query to figure out what connections does this user already have?
         # I.e. who are they following
@@ -123,7 +140,7 @@ class users_controller extends base_controller
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->connections = $this->get_followers();
+        $this->template->content->connections = $this->get_following();
 
         # Render the view
         echo $this->template;
@@ -168,7 +185,7 @@ class users_controller extends base_controller
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->connections = $this->get_followers();
+        $this->template->content->connections = $this->get_following();
 
         # Render the view
         echo $this->template;

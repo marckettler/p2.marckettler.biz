@@ -1,3 +1,11 @@
 div.error{
-    color: rgb(255, 0, 0)
+    color: rgb(255, 0, 0);
+}
+
+.page-header{
+    margin-top: 0;
+}
+
+.panel-body{
+    padding-top: 0;
 }

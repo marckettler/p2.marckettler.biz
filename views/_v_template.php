@@ -7,6 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
         <link href="/css/bootstrap.css" type="text/css" rel="stylesheet" media="screen" />
+        <link href="/css/blooper.css" type="text/css" rel="stylesheet" />
         <!-- Controller Specific JS/CSS -->
         <?php if(isset($client_files_head)) echo $client_files_head; ?>
         
@@ -28,7 +29,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/users/edit_profile">Edit</a></li>
-                                    <li><a href="/posts/view_profile">View</a></li>
+                                    <li><a href="/users/profile">View</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">

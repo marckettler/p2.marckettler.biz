@@ -1,4 +1,4 @@
-<article class="container">
+<div class="container">
     <?php foreach($users as $user): ?>
         <?php if(isset($connections[$user['user_id']])): ?>
         <article class="container">
@@ -11,4 +11,4 @@
         </article>
         <? endif; ?>
     <?php endforeach; ?>
-</article>
+</div>
