@@ -75,21 +75,19 @@ class users_controller extends base_controller
 			echo $this->template;
 		}
 	} # end profile
-	
-	public function show_all_users()
-	{
-        # Set up the View
-        $this->template->content = View::instance("v_show_all_users");
-        $this->template->title   = "Users";
-        $this->template->content->current_user_id = $this->user->user_id;
 
+    private function get_all_users()
+    {
         # Build the query to get all the users
         $q = "SELECT * FROM users";
 
         # Execute the query to get all the users.
-        # Store the result array in the variable $users
-        $users = DB::instance(DB_NAME)->select_rows($q);
+        return DB::instance(DB_NAME)->select_rows($q);
 
+    } # end get_all_users
+
+    private function get_followers()
+    {
         # Build the query to figure out what connections does this user already have?
         # I.e. who are they following
         $q = "SELECT *
@@ -100,11 +98,32 @@ class users_controller extends base_controller
         # select_array will return our results in an array and use the "users_id_followed" field as the index.
         # This will come in handy when we get to the view
         # Store our results (an array) in the variable $connections
-        $connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
+        return DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
+    } # end get_followers
+
+    private function get_following_me()
+    {
+        # Build the query to figure out who is following me
+        $q = "SELECT *
+        FROM users_users
+        WHERE user_id_followed = ".$this->user->user_id;
+
+        # Execute this query with the select_array method
+        # select_array will return our results in an array and use the "users_id" field as the index.
+        # This will come in handy when we get to the view
+        return DB::instance(DB_NAME)->select_array($q, 'user_id');
+    }
+
+	public function show_all_users()
+	{
+        # Set up the View
+        $this->template->content = View::instance("v_show_all_users");
+        $this->template->title   = "Users";
+        $this->template->content->current_user_id = $this->user->user_id;
 
         # Pass data (users and connections) to the view
-        $this->template->content->users       = $users;
-        $this->template->content->connections = $connections;
+        $this->template->content->users       = $this->get_all_users();
+        $this->template->content->connections = $this->get_followers();
 
         # Render the view
         echo $this->template;
@@ -126,31 +145,34 @@ class users_controller extends base_controller
         Router::redirect("/users/show_all_users");
     } # end follow
 
-    public function following()
+    public function followed_by()
     {
         # Set up the View
-        $this->template->content = View::instance("v_show_all_users");
-        $this->template->title   = "Users";
-        $this->template->content->current_user_id = $this->user->user_id;
-
-        # Get the users I am following
-        $q = "SELECT *
-        FROM users_users
-        WHERE user_id = ".$this->user->user_id;
-
-        # Execute this query with the select_array method
-        # select_array will return our results in an array and use the "users_id_followed" field as the index.
-        # This will come in handy when we get to the view
-        # Store our results (an array) in the variable $connections
-        $connections = DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
+        $this->template->content = View::instance("v_following");
+        $this->template->title   = "Users Following Me";
 
         # Pass data (users and connections) to the view
-        $this->template->content->users       = $users;
-        $this->template->content->connections = $connections;
+        $this->template->content->users       = $this->get_all_users();
+        $this->template->content->connections = $this->get_following_me();
 
         # Render the view
         echo $this->template;
     }
+
+    public function following()
+    {
+        # Set up the View
+        $this->template->content = View::instance("v_following");
+        $this->template->title   = "Users I Follow";
+        $this->template->content->current_user_id = $this->user->user_id;
+
+        # Pass data (users and connections) to the view
+        $this->template->content->users       = $this->get_all_users();
+        $this->template->content->connections = $this->get_followers();
+
+        # Render the view
+        echo $this->template;
+    } #end following
 
     public function unfollow($user_id_to_unfollow)
     {

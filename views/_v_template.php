@@ -24,7 +24,13 @@
                 <div class="collapse navbar-collapse navHeaderCollapse">
                     <ul class="nav navbar-nav navbar-left">
                         <?php if($user): ?>
-                            <li><a href="/users/profile">Profile</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/users/edit_profile">Edit</a></li>
+                                    <li><a href="/posts/view_profile">View</a></li>
+                                </ul>
+                            </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -36,8 +42,8 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/users/show_all_users">Display All Users</a></li>
-                                    <li><a href="/users/show_followers">Who I Follow</a></li>
-                                    <li><a href="/users/show_following">Who Follows Me</a></li>
+                                    <li><a href="/users/following">Who I Follow</a></li>
+                                    <li><a href="/users/followed_by">Who Follows Me</a></li>
                                 </ul>
                             </li>
                             <li><a href="/users/logout">Log Out</a></li>

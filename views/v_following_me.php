@@ -4,8 +4,7 @@
         <article class="container">
             <div class="panel panel-default">
                 <p class="panel-body">
-                    <?=$user['first_name']?> <?=$user['last_name']?>
-                    <a href='/users/unfollow/<?=$user['user_id']?>'>Unfollow</a>
+                    <?=$user['first_name']?> <?=$user['last_name']?> is following me.
                 </p>
             </div>
         </article>
