@@ -10,17 +10,16 @@ class posts_controller extends base_controller
         }
 	}
 	
-	public function add_post()
+	public function add()
 	{		
 		# Setup view
-        $this->template->content = View::instance('v_add_post');
+        $this->template->content = View::instance('v_posts_add');
         $this->template->title = "New Post";
-
         # Render template
         echo $this->template;
 	} #end add_post
 
-    public function p_add_post(){
+    public function p_add(){
         # Associate this post with this user
         $_POST['user_id'] = $this->user->user_id;
 
@@ -31,14 +30,18 @@ class posts_controller extends base_controller
         # Insert using DB function that will sanitize the input
         DB::instance(DB_NAME)->insert('posts',$_POST);
 
-        echo "Post added <a href='/users/profile'>Back to Profile</a>";
+        Router::redirect('/posts/view/new_post');
     }
 	
-	public function view_posts()
+	public function view($new_post = NULL)
 	{
         # Set up the View
-        $this->template->content = View::instance('v_view_posts');
+        $this->template->content = View::instance('v_posts_view');
         $this->template->title   = "Posts";
+        if($new_post=="new_post")
+        {
+            $this->template->content->new_post   = $new_post;
+        }
 
         # Build the query
         $q = "SELECT
@@ -57,6 +60,5 @@ class posts_controller extends base_controller
 
         # Render the View
         echo $this->template;
-
     } # end view_posts
 } # eoc

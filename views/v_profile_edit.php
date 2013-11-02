@@ -6,7 +6,7 @@
                     <div class="page-header">
                         <h2 class="text-center">Edit your profile by changing the fields below.</h2>
                     </div>
-                    <form class="form-horizontal" role="form" method="POST" action="/users/p_login">
+                    <form class="form-horizontal" role="form" method="POST" action="/profile/p_edit">
                         <div class="form-group">
                             <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
                             <div class="col-sm-10">
@@ -22,17 +22,18 @@
                         <div class="form-group">
                             <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Email" required>
+                                <input type="email" name="email" class="form-control<? if(isset($email_error)) echo ' alert-danger';?>" id="inputEmail" value="<?=$user->email;?>" required>
+                                <? if(isset($email_error)) echo "<strong class='text-danger'>Email was not unique</strong>";?>
                             </div>
                         </div>
-                            <?=$user->first_name;?> <?=$user->last_name;?> - <?=$user->email;?>
-                            Member Since: <?=Time::display($user->created)?><br>
-                            Last Login: <?=Time::display($user->last_login)?><br>
-                            Last Profile Edit: <?=Time::display($user->modified)?><br>
-                            You are following <?=$num_following;?> other users<br>
-                            There are <?=$num_following_me;?> users following you<br>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="reset" class="btn btn-warning">Reset</button>
+                                <a class="btn btn-danger" href="/profile/view">Cancel</a>
+                            </div>
+                        </div>
                     </form>
-                    <img class="img-responsive img-rounded" src="<?=$user->avatar?>" alt="User's Avatar"/>
                 </div>
             </div>
         </div>

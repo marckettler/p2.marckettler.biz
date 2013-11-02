@@ -2,7 +2,7 @@
 <html>
     <head>
         <title><?php if(isset($title)) echo $title; ?></title>
-    
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- Bootstrap -->
@@ -10,33 +10,34 @@
         <link href="/css/blooper.css" type="text/css" rel="stylesheet" />
         <!-- Controller Specific JS/CSS -->
         <?php if(isset($client_files_head)) echo $client_files_head; ?>
-        
     </head>
     
     <body>
-        <div class="navbar navbar-inverse navbar-static-top">
-            <div class="container">
-                <a href="/" class="navbar-brand">Blooper</a>
-                <button class="navbar-toggle" data-toggle = "collapse" data-target=".navHeaderCollapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
+        <div class="container">
+            <div class="navbar navbar-inverse navbar-static-top">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navHeaderCollapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="navbar-brand">Blooper</a>
+                </div>
                 <div class="collapse navbar-collapse navHeaderCollapse">
                     <ul class="nav navbar-nav navbar-left">
                         <?php if($user): ?>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/users/edit_profile">Edit</a></li>
-                                    <li><a href="/users/profile">View</a></li>
+                                    <li><a href="/profile/edit">Edit</a></li>
+                                    <li><a href="/profile/view">View</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/posts/add_post">Add Post</a></li>
-                                    <li><a href="/posts/view_posts">View Posts</a></li>
+                                    <li><a href="/posts/add">Add Post</a></li>
+                                    <li><a href="/posts/view">View Posts</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -53,11 +54,9 @@
                         <?php endif; ?>
                     </ul>
                 </div>
-            </div>
-        </div>
-    
-        <?php if(isset($content)) echo $content; ?>
-    
+            </div> <!-- /div.navbar -->
+            <?php if(isset($content)) echo $content; ?>
+        </div> <!-- /container -->
         <?php if(isset($client_files_body)) echo $client_files_body; ?>
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="/js/jquery-2.0.3.js" type="text/javascript"></script>

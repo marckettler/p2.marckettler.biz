@@ -1,12 +1,14 @@
-<article class="container">
+<div class="container">
+    <? if(isset($new_post)): ?>
+        <h3 class="text-center"><strong class="text-success">You have added a new post</strong></h3>
+    <? endif; ?>
     <?php foreach($posts as $post): ?>
-
         <article class="container">
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3><?=$post['first_name']?> <?=$post['last_name']?> posted:</h3>
-                </div>
                 <div class="panel-body">
+                    <div class="page-header">
+                        <h3><?=$post['first_name']?> <?=$post['last_name']?> posted:</h3>
+                    </div>
                     <p><?=$post['content']?></p>
                 </div>
                 <div class="panel-footer">
@@ -16,6 +18,5 @@
                 </div>
             </div>
         </article>
-
     <?php endforeach; ?>
-</article>
+</div>
