@@ -24,9 +24,11 @@ class users_controller extends base_controller
 	
 	public function p_signup()
 	{
+        $_POST['first_name'] = $this->stop_xss($_POST['first_name']);
+        $_POST['last_name'] = $this->stop_xss($_POST['last_name']);
         $this->user = $this->userObj->signup($_POST);
         $this->userObj->create_initial_avatar($this->user["user_id"]);
-		Router::redirect("/users/view/");
+		Router::redirect("/profile/view/");
 	} #end signup post
 		
 	public function login($error = NULL)
@@ -54,7 +56,7 @@ class users_controller extends base_controller
 		
 		if($user_token)
 		{
-			Router::redirect("/users/view");
+			Router::redirect("/profile/view");
 		}
 		else
 		{	

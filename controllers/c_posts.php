@@ -26,7 +26,8 @@ class posts_controller extends base_controller
         # Add unix timestamps of when the post was created/modified
         $_POST['created'] = Time::now();
         $_POST['modified'] = Time::now();
-
+        # Prevent xss attacks.
+        $_POST['content'] = $this->stop_xss($_POST['content']);
         # Insert using DB function that will sanitize the input
         DB::instance(DB_NAME)->insert('posts',$_POST);
 

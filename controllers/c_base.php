@@ -27,6 +27,10 @@ class base_controller {
 			
 	}
 
+    protected function stop_xss($input)
+    {
+        return strip_tags($input);
+    } # End stop_xss
     protected function get_all_users()
     {
         # Build the query to get all the users
