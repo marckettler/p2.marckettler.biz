@@ -34,28 +34,24 @@ class posts_controller extends base_controller
         Router::redirect('/posts/view/new_post');
     }
 	
-	public function view($new_post = NULL)
+	public function view($param = NULL)
 	{
         # Set up the View
         $this->template->content = View::instance('v_posts_view');
         $this->template->title   = "Posts";
-        if($new_post=="new_post")
+        if($param=="new_post")
         {
-            $this->template->content->new_post   = $new_post;
+            $this->template->content->new_post   = $param;
         }
 
-        # Build the query
-        $q = "SELECT
-            posts .* ,
-            users.first_name,
-            users.last_name
-        FROM posts
-        INNER JOIN users
-            ON posts.user_id = users.user_id";
-
-        # Run the query
-        $posts = DB::instance(DB_NAME)->select_rows($q);
-
+        if($param=="my" || $param=="new_post")
+        {
+            $posts = $this->get_my_posts();
+        }
+        else
+        {
+            $posts = $this->get_following_posts();
+        }
         # Pass data to the View
         $this->template->content->posts = $posts;
 

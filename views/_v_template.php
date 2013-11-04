@@ -27,30 +27,32 @@
                     <ul class="nav navbar-nav navbar-left">
                         <?php if($user): ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloopfile <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/profile/edit">Edit</a></li>
                                     <li><a href="/profile/view">View</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Posts <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloops <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/posts/add">Add Post</a></li>
-                                    <li><a href="/posts/view">View Posts</a></li>
+                                    <li><a href="/posts/add">New Bloop</a></li>
+                                    <li><a href="/posts/view/my">View My Bloops</a></li>
+                                    <li><a href="/posts/view/following">View Other Bloops</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloopers <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/users/show_all_users">Display All Users</a></li>
-                                    <li><a href="/users/following">Who I Follow</a></li>
-                                    <li><a href="/users/followed_by">Who Follows Me</a></li>
+                                    <li><a href="/users/show_all_users">Display All Bloopers</a></li>
+                                    <li><a href="/users/following">Who I Bloop</a></li>
+                                    <li><a href="/users/followed_by">Who Bloops Me</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/users/logout">Log Out</a></li>
+                            <li><a href="/users/logout">Bloop Out</a></li>
                         <?php else: ?>
-                            <li><a href="/users/login">Log In</a></li>
+                            <li><a href="/users/login">Bloop In</a></li>
+                            <li><a href="/users/signup">Bloop Up</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>
