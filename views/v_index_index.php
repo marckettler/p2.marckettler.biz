@@ -6,7 +6,7 @@
 <? else: ?>
         <!-- display landing page for non member -->
         <h1>Welcome to <?=APP_NAME?>!</h1>
-        <p>To start blooping you must <a class="btn btn-danger btn-sm" href="/users/signup">Bloop up!</a></p>
+        <p>To start Blooping you must <a class="btn btn-danger btn-sm" href="/users/signup">Bloop up!</a></p>
 <? endif ?>
         <p>Blooper is <?=($bloopify ? "" : "not");?> the only place you can:</p>
         <p>

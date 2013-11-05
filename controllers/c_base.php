@@ -7,43 +7,34 @@ class base_controller {
 	public $template;
 	public $email_template;
     public $bloopify;
-
 	/*-------------------------------------------------------------------------------------------------
 
 	-------------------------------------------------------------------------------------------------*/
-	public function __construct() {
+	public function __construct()
+    {
 		# Instantiate User obj
 			$this->userObj = new User();
 
 		# Authenticate / load user
    			$this->user = $this->userObj->authenticate();
-            $this->bloopify = $this->is_bloopified();
 		# Set up templates
 			$this->template 	  = View::instance('_v_template');
 			$this->email_template = View::instance('_v_email');
-            $this->template->set_global('bloopify', $this->bloopify);
 		# So we can use $user in views			
 			$this->template->set_global('user', $this->user);
+        # Trigger Bloopify
+            $this->bloopify = $this->is_bloopified();
+            $this->template->set_global('bloopify', $this->bloopify);
 	}
 
     # Method to clean inputs that include XSS Attacks
     protected function stop_xss($input)
     {
+        # Probably need to do more than this
         return strip_tags($input);
     } # End stop_xss
 
-    # DB call that gets all users as a
-    protected function get_all_users()
-    {
-        # Build the query to get all the users
-        $q = "SELECT * FROM users";
-
-        # Execute the query to get all the users no need to sanitize
-        # as there is no user input in the query
-        return DB::instance(DB_NAME)->select_rows($q);
-
-    } # end get_all_users
-
+    # Check to see if logged in user is bloopified or not
     private function is_bloopified()
     {
         if(!$this->user)
@@ -55,7 +46,9 @@ class base_controller {
         $row = DB::instance(DB_NAME)->select_row($q);
         return $row['bloopify'];
     }
-    # DB Call to return users following the logged in user as an array
+
+    # DB Call to return users the current user is following as an array
+    # Used in more than one subclass. Trying to stay DRY
     protected function get_following()
     {
         # Build the query to figure out what connections does this user already have?
@@ -71,6 +64,8 @@ class base_controller {
         return DB::instance(DB_NAME)->select_array($q, 'user_id_followed');
     } # End get_following
 
+    # DB Call to return users following the logged in user as an array
+    # Used in more than one subclass. Trying to stay DRY
     protected function get_following_me()
     {
         # Build the query to figure out who is following me

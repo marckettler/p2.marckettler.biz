@@ -3,7 +3,7 @@
 class index_controller extends base_controller {
 	
 	/*-------------------------------------------------------------------------------------------------
-
+    Controller for landing page
 	-------------------------------------------------------------------------------------------------*/
 	public function __construct() {
 		parent::__construct();

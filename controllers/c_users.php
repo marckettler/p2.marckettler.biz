@@ -1,12 +1,14 @@
 <?php
 class users_controller extends base_controller
 {
-	
+    /*-------------------------------------------------------------------------------------------------
+      Users Controller
+     -------------------------------------------------------------------------------------------------*/
 	public function __construct()
 	{
 		parent::__construct();
 	}
-	
+	# Render Sign up page
 	public function signup()
 	{
         # If logged in goto index
@@ -21,19 +23,24 @@ class users_controller extends base_controller
 		# Render template
 		echo $this->template;	
 	} #end signup
-	
+
+    # Process Signup
 	public function p_signup()
 	{
         $_POST['first_name'] = $this->stop_xss($_POST['first_name']);
         $_POST['last_name'] = $this->stop_xss($_POST['last_name']);
+        # User Object performs sanitized input
         $this->user = $this->userObj->signup($_POST);
+        # Creates and Saves an avatar
         $this->userObj->create_initial_avatar($this->user["user_id"]);
         $avatar_img = new Image($this->user->avatar);
         $avatar_img->resize(100,100);
         $avatar_img->save_image($this->user->avatar);
+        # Sign up complete forward to profile page
 		Router::redirect("/profile/view/");
 	} #end signup post
-		
+
+    # Render Log In Page
 	public function login($error = NULL)
 	{
         # If logged in goto index
@@ -51,7 +58,8 @@ class users_controller extends base_controller
         $this->template->content->common_form_inputs = View::instance("v_common_form_inputs");
 		echo $this->template;
 	} #end login
-	
+
+    # Process login
 	public function p_login()
 	{	
 		# Check to see if User is in the database login method will sanitize inputs
@@ -63,11 +71,12 @@ class users_controller extends base_controller
 		}
 		else
 		{	
-			# Invalid loging attempt redirect to login page
+			# Invalid login attempt redirect to login page with error flag
 			Router::redirect("/users/login/error");
 		}		
 	} # end login post	
-		
+
+    # Logout
 	public function logout()
 	{
 		#Log the current user out
@@ -76,7 +85,8 @@ class users_controller extends base_controller
 		Router::redirect('/');
 	} # end logout
 
-	public function show_all_users()
+    # Render Show all Users Page
+	public function show_all_users($param = NULL)
 	{
         # Set up the View
         $this->template->content = View::instance("v_users_show_all_users");
@@ -86,11 +96,13 @@ class users_controller extends base_controller
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
         $this->template->content->connections = $this->get_following();
-
+        ($param=="new_follow" ? $this->template->content->new_follow=$param : "do nothing");
+        ($param=="new_unfollow" ? $this->template->content->new_unfollow=$param : "do nothing" );
         # Render the view
         echo $this->template;
 	} # end show_all_users
 
+    # Currently logged in user follows passed in user_id
     public function follow($user_id_followed)
     {
         # Prepare the data array to be inserted
@@ -104,7 +116,7 @@ class users_controller extends base_controller
         DB::instance(DB_NAME)->insert('users_users', $data);
 
         # Send them back
-        Router::redirect("/users/show_all_users");
+        Router::redirect("/users/show_all_users/new_follow");
     } # end follow
 
     public function followed_by()
@@ -144,6 +156,15 @@ class users_controller extends base_controller
     {
         $cond = DB::instance(DB_NAME)->sanitize("WHERE user_id =".$this->user->user_id." AND user_id_followed = ".$user_id_to_unfollow);
         DB::instance(DB_NAME)->delete('users_users', $cond );
-        Router::redirect("/users/show_all_users");
+        Router::redirect("/users/show_all_users/new_unfollow");
     } # end unfollow
+
+    # DB call that gets all users
+    protected function get_all_users()
+    {
+        # Build the query to get all the users
+        $q = "SELECT * FROM users";
+        return DB::instance(DB_NAME)->select_rows($q);
+
+    } # end get_all_users
 } # eoc
