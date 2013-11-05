@@ -142,7 +142,7 @@ class posts_controller extends base_controller
 
     private function delete_post($post_id)
     {
-        $cond = "WHERE user_id =".$this->user->user_id." AND post_id = ".$post_id;
+        $cond = DB::instance(DB_NAME)->sanitize("WHERE user_id =".$this->user->user_id." AND post_id = ".$post_id);
         DB::instance(DB_NAME)->delete("posts",$cond);
     }
 

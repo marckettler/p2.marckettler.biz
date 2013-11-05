@@ -110,13 +110,13 @@ class users_controller extends base_controller
     public function followed_by()
     {
         # Set up the View
-        $this->template->content = View::instance("v_users_following");
+        $this->template->content = View::instance("v_users_following_me");
         $this->template->title   = "Users Following Me";
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->connections = $this->get_following_me();
-
+        $this->template->content->following_me = $this->get_following_me();
+        $this->template->content->following = $this->get_following();
         # Render the view
         echo $this->template;
     }
@@ -130,7 +130,7 @@ class users_controller extends base_controller
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->connections = $this->get_following();
+        $this->template->content->following = $this->get_following();
 
         # Render the view
         echo $this->template;

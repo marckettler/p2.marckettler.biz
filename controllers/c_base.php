@@ -71,6 +71,7 @@ class base_controller {
         # Execute this query with the select_array method
         # select_array will return our results in an array and use the "users_id" field as the index.
         # This will come in handy when we get to the view
+        # user_id is the user that is following me
         return DB::instance(DB_NAME)->select_array($q, 'user_id');
     } # End get_following_me
 } # eoc

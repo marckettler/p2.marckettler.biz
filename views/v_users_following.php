@@ -1,10 +1,12 @@
 <div class="container">
     <?php foreach($users as $user): ?>
-        <?php if(isset($connections[$user['user_id']])): ?>
+        <?php if(isset($following[$user['user_id']])): ?>
             <article class="panel panel-default">
-                <div class="panel-body">
-                    <?=$user['first_name']?> <?=$user['last_name']?>
-                    <a href='/users/unfollow/<?=$user['user_id']?>'>Unfollow</a>
+                <div class="page-header">
+                    <h2 class="text-center"><?=$user['first_name']?> <?=$user['last_name']?></h2>
+                </div>
+                <div class="panel-body text-center">
+                    <a class="btn btn-danger btn-sm" href='/users/unfollow/<?=$user['user_id']?>'>UnBloop Me!</a>
                 </div>
             </article>
         <? endif; ?>
