@@ -7,9 +7,9 @@
                 </div>
                 <div class="panel-body text-center">
                     <?php if(isset($following[$user['user_id']])): ?>
-                        <a class="btn btn-danger btn-sm" href='/users/unfollow/<?=$user['user_id']?>'>UnBloop Me!</a>
+                        <a class="btn btn-danger btn-sm" href='/users/unfollow/<?=$user['user_id']?>'>Un<?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
                     <?php else: ?>
-                        <a class="btn btn-success btn-sm" href='/users/follow/<?=$user['user_id']?>'>Bloop Me!</a>
+                        <a class="btn btn-success btn-sm" href='/users/follow/<?=$user['user_id']?>'><?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
                     <?php endif; ?>
                 </div>
             </article>

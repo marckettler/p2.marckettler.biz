@@ -47,10 +47,12 @@ class posts_controller extends base_controller
         if($param=="my" || $param=="new_post" || $param=="delete_post")
         {
             $posts = $this->get_my_posts();
+            $this->template->content->my_posts = true;
         }
         else
         {
             $posts = $this->get_following_posts();
+            $this->template->content->followers_posts = true;
             $this->template->content->like = $this->get_posts_liked();
             $this->template->content->dislike = $this->get_posts_disliked();
         }

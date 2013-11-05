@@ -129,9 +129,13 @@ class users_controller extends base_controller
         $this->template->content->current_user_id = $this->user->user_id;
 
         # Pass data (users and connections) to the view
+        $following = $this->get_following();
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->following = $this->get_following();
-
+        $this->template->content->following = $following;
+        if(empty($following))
+        {
+            $this->template->content->not_following = true;
+        }
         # Render the view
         echo $this->template;
     } #end following

@@ -6,25 +6,24 @@ class base_controller {
 	public $userObj;
 	public $template;
 	public $email_template;
+    public $bloopify;
 
 	/*-------------------------------------------------------------------------------------------------
 
 	-------------------------------------------------------------------------------------------------*/
 	public function __construct() {
-						
 		# Instantiate User obj
 			$this->userObj = new User();
-			
+
 		# Authenticate / load user
-			$this->user = $this->userObj->authenticate();					
-						
+   			$this->user = $this->userObj->authenticate();
+            $this->bloopify = $this->is_bloopified();
 		# Set up templates
 			$this->template 	  = View::instance('_v_template');
-			$this->email_template = View::instance('_v_email');			
-								
+			$this->email_template = View::instance('_v_email');
+            $this->template->set_global('bloopify', $this->bloopify);
 		# So we can use $user in views			
 			$this->template->set_global('user', $this->user);
-			
 	}
 
     # Method to clean inputs that include XSS Attacks
@@ -45,6 +44,17 @@ class base_controller {
 
     } # end get_all_users
 
+    private function is_bloopified()
+    {
+        if(!$this->user)
+        {
+            return false;
+        }
+
+        $q = "SELECT bloopify FROM users WHERE user_id=".$this->user->user_id;
+        $row = DB::instance(DB_NAME)->select_row($q);
+        return $row['bloopify'];
+    }
     # DB Call to return users following the logged in user as an array
     protected function get_following()
     {

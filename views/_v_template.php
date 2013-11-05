@@ -29,32 +29,33 @@
                     <ul class="nav navbar-nav navbar-left">
                         <?php if($user): ?>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloopfile <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=($bloopify ? "Bloop" : "Pro");?>file <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/profile/edit">Edit</a></li>
                                     <li><a href="/profile/view">View</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloops <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=($bloopify ? "Bloops" : "Posts");?> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/posts/add">New Bloop</a></li>
-                                    <li><a href="/posts/view/my">View My Bloops</a></li>
-                                    <li><a href="/posts/view/following">View Other Bloops</a></li>
+                                    <li><a href="/posts/add">New <?=($bloopify ? "Bloop" : "Post");?></a></li>
+                                    <li><a href="/posts/view/my">View My <?=($bloopify ? "Bloops" : "Posts");?></a></li>
+                                    <li><a href="/posts/view/following">View Other <?=($bloopify ? "Bloops" : "Posts");?></a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Bloopers <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=($bloopify ? "Bloopers" : "Users");?> <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="/users/show_all_users">Display All Bloopers</a></li>
-                                    <li><a href="/users/following">Who I Bloop</a></li>
-                                    <li><a href="/users/followed_by">Who Bloops Me</a></li>
+                                    <li><a href="/users/show_all_users">Display All <?=($bloopify ? "Bloopers" : "Users");?></a></li>
+                                    <li><a href="/users/following">Who I <?=($bloopify ? "Bloop" : "Follow");?></a></li>
+                                    <li><a href="/users/followed_by">Who <?=($bloopify ? "Bloop" : "Follow");?> Me</a></li>
                                 </ul>
                             </li>
-                            <li><a href="/users/logout">Bloop Out</a></li>
+                            <li <?=($bloopify ? "" : 'class="active"');?>><a href="/bloopify/bloopify_me/<?= str_replace("/","%20",ROUTER::$routed_uri);?>"><?=($bloopify ? "UnBloopify" : "Bloopify");?></a></li>
+                            <li><a href="/users/logout"><?=($bloopify ? "Bloop" : "Log");?> Out</a></li>
                         <?php else: ?>
-                            <li><a href="/users/login">Bloop In</a></li>
-                            <li><a href="/users/signup">Bloop Up</a></li>
+                            <li><a href="/users/login"><?=($bloopify ? "Bloop" : "Sign");?> In</a></li>
+                            <li><a href="/users/signup"><?=($bloopify ? "Bloop" : "Sign");?> Up</a></li>
                         <?php endif; ?>
                     </ul>
                 </div>

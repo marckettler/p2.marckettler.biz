@@ -1,7 +1,7 @@
 <div class="container">
     <article class="panel panel-default">
         <div class="page-header">
-            <h2 class="text-center">Edit your Bloopfile by changing the fields below.</h2>
+            <h2 class="text-center">Edit your <?=($bloopify ? "Bloop" : "Pro");?>file by changing the fields below.</h2>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" role="form" method="POST" action="/profile/p_edit">
