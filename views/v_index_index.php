@@ -17,8 +17,13 @@
             List all Bloopers!<br>
             Bloop and UnBloop the other Bloopers!<br>
             View the Bloops of the Bloopers you Bloop!<br>
-            <span class="badge">+1</span> Edit your Bloopfile<br>
-            <span class="badge">+1</span> Edit your Bloops
+            <span class="badge">+1</span> View your Bloopfile!<br>
+            <span class="badge">+1</span> Edit your Bloopfile!<br>
+            <span class="badge">+1</span> Edit your Bloops!<br>
+            <span class="badge">+1</span> Delete your Bloops!<br>
+            <span class="badge">+1</span> Bloop and DisBloop other Blooper's Bloops!<br>
+            We are not a knock off of Twitter it is just happenstance that Tweet is to Twitter as Bloop is to Blooper<br>
+
         </p>
     </article>
 </div>

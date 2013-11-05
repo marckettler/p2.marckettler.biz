@@ -33,33 +33,6 @@ class base_controller {
         return strip_tags($input);
     } # End stop_xss
 
-    # DB call to get all users posts of users the currently logged in user follows
-    protected function get_following_posts()
-    {
-        # Build the query
-        $q = "SELECT first_name, last_name, followers.created, content, followers.modified
-         FROM users,
-          (SELECT user_id_followed, content, posts.created, posts.modified
-          FROM users_users, posts
-          WHERE users_users.user_id = ".$this->user->user_id."
-          AND user_id_followed = posts.user_id) as followers
-          WHERE user_id = user_id_followed
-          ORDER BY last_name DESC, first_name DESC, created DESC;";
-        return DB::instance(DB_NAME)->select_rows($q);
-    }
-
-    # DB call to get all of the posts of the currently logged in user
-    protected function get_my_posts()
-    {
-        # Build the query
-        $q = "SELECT first_name, last_name, posts.created, content, posts.modified
-         FROM users, posts
-         WHERE users.user_id = ".$this->user->user_id."
-         AND users.user_id = posts.user_id
-         ORDER BY modified DESC;";
-        return DB::instance(DB_NAME)->select_rows($q);
-    }
-
     # DB call that gets all users as a
     protected function get_all_users()
     {
@@ -72,7 +45,7 @@ class base_controller {
 
     } # end get_all_users
 
-    # DB Call to return users following the logged in user
+    # DB Call to return users following the logged in user as an array
     protected function get_following()
     {
         # Build the query to figure out what connections does this user already have?
