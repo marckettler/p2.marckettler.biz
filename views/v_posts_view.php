@@ -8,14 +8,14 @@
     <? endif; ?>
     <? if(empty($posts)):
         if(isset($my_posts)):?>
-        <p class="text-center alert-info">
+        <h3 class="text-center alert-info">
             You have no <?=($bloopify ? "Bloops" : "Posts");?> :(. Click <a class="btn btn-sm btn-primary" href="/posts/add">here</a> and start <?=($bloopify ? "Bloop" : "Post");?>ing!
-        </p>
+        </h3>
         <? else: ?>
-        <p class="text-center alert-info">
+        <h3 class="text-center alert-info">
             The <?=($bloopify ? "Bloopers" : "Users");?> you are <?=($bloopify ? "Bloop" : "Follow");?>ing have no <?=($bloopify ? "Bloops" : "Posts");?> :(<br>
             Click <a class="btn btn-sm btn-primary" href="/users/show_all_users">here</a> and start <?=($bloopify ? "Bloop" : "Follow");?>ing other <?=($bloopify ? "Bloopers" : "Users");?>!
-        </p>
+        </h3>
         <? endif;
     endif; ?>
     <? foreach($posts as $post): ?>
