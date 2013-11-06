@@ -127,10 +127,10 @@ class users_controller extends base_controller
         # Set up the View
         $this->template->content = View::instance("v_users_following_me");
         $this->template->title   = "Users Following Me";
-
+        $following_me = $this->get_following_me($this->user->user_id);
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->following_me = $this->get_following_me($this->user->user_id);
+        $this->template->content->following_me = $following_me;
         $this->template->content->following = $this->get_following($this->user->user_id);
         # flag for status message if nobody is following the current user
         if(empty($following_me))
