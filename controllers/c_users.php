@@ -33,9 +33,7 @@ class users_controller extends base_controller
         $this->user = $this->userObj->signup($_POST);
         # Creates and Saves an avatar
         $this->userObj->create_initial_avatar($this->user["user_id"]);
-        $avatar_img = new Image($this->user->avatar);
-        $avatar_img->resize(100,100);
-        $avatar_img->save_image($this->user->avatar);
+        $this->userObj->login($_POST["email"],$_POST["password"]);
         # Sign up complete forward to profile page
 		Router::redirect("/profile/view/");
 	} #end signup post
@@ -95,7 +93,7 @@ class users_controller extends base_controller
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->connections = $this->get_following();
+        $this->template->content->following = $this->get_following($this->user->user_id);
         ($param=="new_follow" ? $this->template->content->new_follow=$param : "do nothing");
         ($param=="new_unfollow" ? $this->template->content->new_unfollow=$param : "do nothing" );
         # Render the view
@@ -127,8 +125,8 @@ class users_controller extends base_controller
 
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
-        $this->template->content->following_me = $this->get_following_me();
-        $this->template->content->following = $this->get_following();
+        $this->template->content->following_me = $this->get_following_me($this->user->user_id);
+        $this->template->content->following = $this->get_following($this->user->user_id);
         # Render the view
         echo $this->template;
     }
@@ -141,7 +139,7 @@ class users_controller extends base_controller
         $this->template->content->current_user_id = $this->user->user_id;
 
         # Pass data (users and connections) to the view
-        $following = $this->get_following();
+        $following = $this->get_following($this->user->user_id);
         $this->template->content->users       = $this->get_all_users();
         $this->template->content->following = $following;
         if(empty($following))

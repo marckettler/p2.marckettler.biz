@@ -14,6 +14,7 @@
                 </div>
                 <div class="panel-body text-center">
                     <a class="btn btn-danger btn-sm" href='/users/unfollow/<?=$user['user_id']?>'>Un<?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
+                    <a class="btn btn-info btn-sm" href="/profile/view/<?=$user['user_id']?>">View <?=($bloopify ? "Bloopfile" : "Profile");?></a>
                 </div>
             </article>
         <? endif; ?>

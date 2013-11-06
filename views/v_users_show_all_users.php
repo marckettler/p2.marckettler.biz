@@ -11,11 +11,12 @@
                     <h2 class="text-center"><?=$user['first_name']?> <?=$user['last_name']?></h2>
                 </div>
                 <div class="panel-body text-center">
-                <? if(isset($connections[$user['user_id']])): ?>
+                <? if(isset($following[$user['user_id']])): ?>
                     <a class="btn btn-danger btn-sm" href='/users/unfollow/<?=$user['user_id']?>'>Un<?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
                 <? else: ?>
-                    <a class="btn btn-success btn-sm" href='/users/follow/<?=$user['user_id']?>'><?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
+                    <a class="btn btn-success btn-sm" href="/users/follow/<?=$user['user_id']?>"><?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
                 <? endif; ?>
+                    <a class="btn btn-info btn-sm" href="/profile/view/<?=$user['user_id']?>">View <?=($bloopify ? "Bloopfile" : "Profile");?></a>
                 </div>
             </article>
         <? endif; ?>

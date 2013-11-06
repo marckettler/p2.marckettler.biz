@@ -9,17 +9,22 @@ class profile_controller extends base_controller
         }
 	}
 
-    public function view($updated = NULL)
+    public function view($param = NULL)
     {
+
+        $q = "SELECT * FROM users WHERE user_id=".(is_numeric($param) ? $param : $this->user->user_id);
+        $user = DB::instance(DB_NAME)->select_row($q);
+
         #Setup view
         $this->template->content = View::instance('v_profile_view');
-        $this->template->title = "Profile of ".$this->user->first_name;
-        if($updated=="updated")
+        $this->template->title = "Profile of ".$user['first_name'];
+        $this->template->content->user_profile = $user;
+        if($param=="updated")
         {
-            $this->template->content->updated = $updated;
+            $this->template->content->updated = $param;
         }
-        $this->template->content->num_following = count($this->get_following());
-        $this->template->content->num_following_me = count($this->get_following_me());
+        $this->template->content->num_following = count($this->get_following($user['user_id']));
+        $this->template->content->num_following_me = count($this->get_following_me($user['user_id']));
         echo $this->template;
     } # end view
 

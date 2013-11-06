@@ -11,6 +11,7 @@
                     <?php else: ?>
                         <a class="btn btn-success btn-sm" href='/users/follow/<?=$user['user_id']?>'><?=($bloopify ? "Bloop" : "Follow");?> Me!</a>
                     <?php endif; ?>
+                        <a class="btn btn-info btn-sm" href="/profile/view/<?=$user['user_id']?>">View <?=($bloopify ? "Bloopfile" : "Profile");?></a>
                 </div>
             </article>
         <? endif; ?>

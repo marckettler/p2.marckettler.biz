@@ -1,13 +1,13 @@
 <div class="container" xmlns="http://www.w3.org/1999/html">
     <article class="jumbotron text-center">
-<? if($user):?>
+        <? if($user):?>
         <!-- display landing page for logged in user -->
         <h1>Welcome back <?=$user->first_name?></h1>
-<? else: ?>
+        <? else: ?>
         <!-- display landing page for non member -->
         <h1>Welcome to <?=APP_NAME?>!</h1>
         <p>To start Blooping you must <a class="btn btn-danger btn-sm" href="/users/signup">Bloop up!</a></p>
-<? endif ?>
+        <? endif ?>
         <p>Blooper is <?=($bloopify ? "" : "not");?> the only place you can:</p>
         <p>
             <span class="text-danger"><?=($bloopify ? "Bloop" : "Sign");?> Up!</span>
@@ -18,6 +18,7 @@
             <?=($bloopify ? "Bloop" : "Follow");?> and <?=($bloopify ? "UnBloop" : "UnFollow");?> the other <?=($bloopify ? "Bloopers" : "Users");?>!<br>
             View the <?=($bloopify ? "Bloop" : "Posts");?> of the <?=($bloopify ? "Bloopers" : "Users");?> you <?=($bloopify ? "Bloop" : "Follow");?>!<br>
             <span class="badge">+1</span> View your <?=($bloopify ? "Bloop" : "Pro");?>file!<br>
+            <span class="badge">+1</span> View the <?=($bloopify ? "Bloop" : "Pro");?>files of the other <?=($bloopify ? "Bloopers" : "Users");?><br>
             <span class="badge">+1</span> Edit your <?=($bloopify ? "Bloop" : "Pro");?>file!<br>
             <span class="badge">+1</span> Edit your <?=($bloopify ? "Bloop" : "Posts");?>!<br>
             <span class="badge">+1</span> Delete your <?=($bloopify ? "Bloop" : "Posts");?>!<br>

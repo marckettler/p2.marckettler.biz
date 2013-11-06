@@ -48,7 +48,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="/users/show_all_users">Display All <?=($bloopify ? "Bloopers" : "Users");?></a></li>
                                     <li><a href="/users/following">Who I <?=($bloopify ? "Bloop" : "Follow");?></a></li>
-                                    <li><a href="/users/followed_by">Who <?=($bloopify ? "Bloop" : "Follow");?> Me</a></li>
+                                    <li><a href="/users/followed_by">Who <?=($bloopify ? "Bloops" : "Follows");?> Me</a></li>
                                 </ul>
                             </li>
                             <li <?=($bloopify ? "" : 'class="active"');?>><a href="/bloopify/bloopify_me/<?= str_replace("/","%20",ROUTER::$routed_uri);?>"><?=($bloopify ? "UnBloopify" : "Bloopify");?></a></li>

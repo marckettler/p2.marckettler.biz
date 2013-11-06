@@ -49,13 +49,13 @@ class base_controller {
 
     # DB Call to return users the current user is following as an array
     # Used in more than one subclass. Trying to stay DRY
-    protected function get_following()
+    protected function get_following($user_id)
     {
         # Build the query to figure out what connections does this user already have?
         # I.e. who are they following
         $q = "SELECT *
         FROM users_users
-        WHERE user_id = ".$this->user->user_id;
+        WHERE user_id = ".$user_id;
 
         # Execute this query with the select_array method
         # select_array will return our results in an array and use the "users_id_followed" field as the index.
@@ -66,12 +66,12 @@ class base_controller {
 
     # DB Call to return users following the logged in user as an array
     # Used in more than one subclass. Trying to stay DRY
-    protected function get_following_me()
+    protected function get_following_me($user_id)
     {
         # Build the query to figure out who is following me
         $q = "SELECT *
         FROM users_users
-        WHERE user_id_followed = ".$this->user->user_id;
+        WHERE user_id_followed = ".$user_id;
 
         # Execute this query with the select_array method
         # select_array will return our results in an array and use the "users_id" field as the index.
