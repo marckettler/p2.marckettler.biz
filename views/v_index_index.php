@@ -25,6 +25,7 @@
             <span class="badge">+1</span> <?=($bloopify ? "Bloop" : "Like");?> and <?=($bloopify ? "DisBloop" : "DisLike");?> other <?=($bloopify ? "Blooper" : "User");?>'s <?=($bloopify ? "Bloops" : "Posts");?>!<br>
             <span class="badge">+1</span> The Amazing Bloopify and UnBloopify menu option<br>
             <?=($bloopify ? "We are not a knock off of Twitter it is just happenstance that Tweet is to Twitter as Bloop is to Blooper<br>" : "");?>
+            <?=($bloopify ? "Blooper does not care what Ylvis says... Fish Go BLOOP not BLUB<br>" : "");?>
         </p>
     </article>
 </div>

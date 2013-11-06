@@ -10,3 +10,7 @@ div.error{
     padding-top: 0;
 }
 
+body{
+    background-image: url("../images/blooper_sm.jpg");
+    background-repeat: repeat;
+}
