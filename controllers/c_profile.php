@@ -1,14 +1,20 @@
 <?php
 class profile_controller extends base_controller
 {
-	public function __construct()
+    /*-------------------------------------------------------------------------------------------------
+    Profile Controller
+    -------------------------------------------------------------------------------------------------*/
+    public function __construct()
 	{
 		parent::__construct();
         if(!$this->user){
             Router::redirect("/");
         }
-	}
+	} # end constructor
 
+    # Render /profile/view
+    # $param used as updated flag
+    # or the user_id of the profile to view
     public function view($param = NULL)
     {
 
@@ -28,6 +34,8 @@ class profile_controller extends base_controller
         echo $this->template;
     } # end view
 
+    # Render /posts/edit
+    # $email_error is a flag that detects if there was an error updated the profile
     public function edit($email_error = NULL)
     {
         #Setup view
@@ -40,20 +48,22 @@ class profile_controller extends base_controller
         echo $this->template;
     } # end edit
 
+    # Process edit profile form
     public function p_edit()
     {
-        # Check to see if email is unchanged
+        # simplify if statements with these variables
         $email_unchanged = $this->user->email == $_POST["email"];
         $first_name_unchanged = $this->user->first_name == $_POST["first_name"];
         $last_name_unchanged = $this->user->last_name == $_POST["last_name"];
         $email_unique = $this->userObj->confirm_unique_email($_POST["email"]);
 
+        # check to see if email is unchanged or unique
         if( $email_unchanged || $email_unique)
         {
-            # Email valid to change now check to if they changed something
+            # Email valid now check to if they changed something
             if($email_unchanged && $first_name_unchanged && $last_name_unchanged)
             {
-                # If nothing has changed redirect to redirect to view
+                # If nothing has changed redirect to redirect to view profile
                 Router::redirect("/profile/view");
             }
 
@@ -65,6 +75,7 @@ class profile_controller extends base_controller
         }
         else
         {
+            # redirect with error flag
             Router::redirect("/profile/edit/email_error");
         }
     } # end p_edit

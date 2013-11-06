@@ -11,7 +11,7 @@
                 </div>
             <?  elseif(isset($_GET['email'])):?>
                 <div class="text-center text-danger">
-                    <h3>Email account in use. <a class="btn btn-danger btn-sm" href="/users/signup">Sign up</a> or Login below.</h3>
+                    <h3>Email account in use. <a class="btn btn-danger btn-sm" href="/users/signup">Sign Up</a> or Sign In below.</h3>
                 </div>
             <?
                 endif;

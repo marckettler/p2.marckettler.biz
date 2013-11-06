@@ -8,7 +8,7 @@ class base_controller {
 	public $email_template;
     public $bloopify;
 	/*-------------------------------------------------------------------------------------------------
-
+    Base Controller for all other controllers
 	-------------------------------------------------------------------------------------------------*/
 	public function __construct()
     {
@@ -25,7 +25,7 @@ class base_controller {
         # Trigger Bloopify
             $this->bloopify = $this->is_bloopified();
             $this->template->set_global('bloopify', $this->bloopify);
-	}
+	} # end constructor
 
     # Method to clean inputs that include XSS Attacks
     protected function stop_xss($input)
@@ -37,6 +37,7 @@ class base_controller {
     # Check to see if logged in user is bloopified or not
     private function is_bloopified()
     {
+        # MEMBERS ONLY FEATURE!!!!!
         if(!$this->user)
         {
             return false;
@@ -45,7 +46,7 @@ class base_controller {
         $q = "SELECT bloopify FROM users WHERE user_id=".$this->user->user_id;
         $row = DB::instance(DB_NAME)->select_row($q);
         return $row['bloopify'];
-    }
+    } # end is_bloopified
 
     # DB Call to return users the current user is following as an array
     # Used in more than one subclass. Trying to stay DRY

@@ -2,16 +2,17 @@
 class users_controller extends base_controller
 {
     /*-------------------------------------------------------------------------------------------------
-      Users Controller
+     Users Controller
      -------------------------------------------------------------------------------------------------*/
 	public function __construct()
 	{
 		parent::__construct();
-	}
+	} # end constructor
+
 	# Render Sign up page
 	public function signup()
 	{
-        # If logged in goto index
+        # Non-Members Only
         if($this->user)
         {
             Router::redirect("/");
@@ -29,10 +30,11 @@ class users_controller extends base_controller
 	{
         $_POST['first_name'] = $this->stop_xss($_POST['first_name']);
         $_POST['last_name'] = $this->stop_xss($_POST['last_name']);
-        # User Object performs sanitized input
+        # User Object performs signup and sanitizes input will redirect on error
         $this->user = $this->userObj->signup($_POST);
         # Creates and Saves an avatar
         $this->userObj->create_initial_avatar($this->user["user_id"]);
+        # Makes sure the user is logged in
         $this->userObj->login($_POST["email"],$_POST["password"]);
         # Sign up complete forward to profile page
 		Router::redirect("/profile/view/");
@@ -84,6 +86,7 @@ class users_controller extends base_controller
 	} # end logout
 
     # Render Show all Users Page
+    # $param flag to show status messages if you follow or unfollow someone
 	public function show_all_users($param = NULL)
 	{
         # Set up the View
@@ -94,6 +97,7 @@ class users_controller extends base_controller
         # Pass data (users and connections) to the view
         $this->template->content->users       = $this->get_all_users();
         $this->template->content->following = $this->get_following($this->user->user_id);
+        # Set flags
         ($param=="new_follow" ? $this->template->content->new_follow=$param : "do nothing");
         ($param=="new_unfollow" ? $this->template->content->new_unfollow=$param : "do nothing" );
         # Render the view
@@ -117,6 +121,7 @@ class users_controller extends base_controller
         Router::redirect("/users/show_all_users/new_follow");
     } # end follow
 
+    # Render view that shows the users following the logged in user
     public function followed_by()
     {
         # Set up the View
@@ -127,10 +132,16 @@ class users_controller extends base_controller
         $this->template->content->users       = $this->get_all_users();
         $this->template->content->following_me = $this->get_following_me($this->user->user_id);
         $this->template->content->following = $this->get_following($this->user->user_id);
+        # flag for status message if nobody is following the current user
+        if(empty($following_me))
+        {
+            $this->template->content->not_following_me = true;
+        }
         # Render the view
         echo $this->template;
-    }
+    } # end followed_by
 
+    # Render view that shows who the current user follows
     public function following()
     {
         # Set up the View
@@ -142,6 +153,7 @@ class users_controller extends base_controller
         $following = $this->get_following($this->user->user_id);
         $this->template->content->users       = $this->get_all_users();
         $this->template->content->following = $following;
+        # flag for status message if you follow nobody
         if(empty($following))
         {
             $this->template->content->not_following = true;
@@ -150,6 +162,7 @@ class users_controller extends base_controller
         echo $this->template;
     } #end following
 
+    # Process unfollow button by unfollowing the selected user
     public function unfollow($user_id_to_unfollow)
     {
         $cond = DB::instance(DB_NAME)->sanitize("WHERE user_id =".$this->user->user_id." AND user_id_followed = ".$user_id_to_unfollow);
@@ -157,8 +170,9 @@ class users_controller extends base_controller
         Router::redirect("/users/show_all_users/new_unfollow");
     } # end unfollow
 
+    # private helper function
     # DB call that gets all users
-    protected function get_all_users()
+    private function get_all_users()
     {
         # Build the query to get all the users
         $q = "SELECT * FROM users";

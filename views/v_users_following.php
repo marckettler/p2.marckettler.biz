@@ -1,5 +1,4 @@
 <div class="container">
-
     <? if(isset($not_following)): ?>
         <h3 class="alert-info text-center">
             You are not <?=($bloopify ? "Bloop" : "Follow");?>ing anyone :(<br>

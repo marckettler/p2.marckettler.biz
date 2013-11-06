@@ -3,16 +3,17 @@
 class bloopify_controller extends base_controller {
 
     /*-------------------------------------------------------------------------------------------------
-       Controller for the Bloopify Feature
+    Controller for the Bloopify Feature
     -------------------------------------------------------------------------------------------------*/
     public function __construct() {
         parent::__construct();
-        // Members only
+        # Members only
         if(!$this->user)
         {
             Router::redirect("/");
         }
-    }
+    } # end constructor
+
     # Flip the bloopify switch for the current user
     public function bloopify_me($param)
     {
@@ -22,5 +23,5 @@ class bloopify_controller extends base_controller {
         # Catch the $param and convert it to the location we just came from.
         $loc = str_replace(" ","/",$param);
         Router::redirect("/".$loc);
-    }
+    } # end bloopify_me
 } # End of class

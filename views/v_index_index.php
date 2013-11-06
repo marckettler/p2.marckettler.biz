@@ -1,4 +1,4 @@
-<div class="container" xmlns="http://www.w3.org/1999/html">
+<div class="container">
     <article class="jumbotron text-center">
         <? if($user):?>
         <!-- display landing page for logged in user -->
@@ -16,7 +16,7 @@
             <span class="text-success"><?=($bloopify ? "Bloop" : "Add Posts");?>!</span><br>
             List all <?=($bloopify ? "Bloopers" : "Users");?>!<br>
             <?=($bloopify ? "Bloop" : "Follow");?> and <?=($bloopify ? "UnBloop" : "UnFollow");?> the other <?=($bloopify ? "Bloopers" : "Users");?>!<br>
-            View the <?=($bloopify ? "Bloop" : "Posts");?> of the <?=($bloopify ? "Bloopers" : "Users");?> you <?=($bloopify ? "Bloop" : "Follow");?>!<br>
+            View the <?=($bloopify ? "Bloops" : "Posts");?> of the <?=($bloopify ? "Bloopers" : "Users");?> you <?=($bloopify ? "Bloop" : "Follow");?>!<br>
             <span class="badge">+1</span> View your <?=($bloopify ? "Bloop" : "Pro");?>file!<br>
             <span class="badge">+1</span> View the <?=($bloopify ? "Bloop" : "Pro");?>files of the other <?=($bloopify ? "Bloopers" : "Users");?><br>
             <span class="badge">+1</span> Edit your <?=($bloopify ? "Bloop" : "Pro");?>file!<br>

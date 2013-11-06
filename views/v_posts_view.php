@@ -1,6 +1,10 @@
 <div class="container">
     <? if(isset($new_post)): ?>
         <h3 class="alert-success text-center text-success"><?=($bloopify ? "Oops you Blooped it again!" : "You added a Post");?></h3>
+    <? elseif(isset($edit_post)): ?>
+        <h3 class="alert-success text-center text-success">You Edited <span class="glyphicon glyphicon-arrow-down"></span> that <?=($bloopify ? "Bloop" : "Post");?></h3>
+    <? elseif(isset($delete_post)): ?>
+        <h3 class="alert-success text-center text-success">You Deleted a <?=($bloopify ? "Bloop" : "Post");?> Ohhh the <?=($bloopify ? "Bloop" : "Human");?>ity!!!</h3>
     <? endif; ?>
     <? if(empty($posts)):
         if(isset($my_posts)):?>

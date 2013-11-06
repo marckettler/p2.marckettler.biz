@@ -7,7 +7,7 @@ class index_controller extends base_controller {
 	-------------------------------------------------------------------------------------------------*/
 	public function __construct() {
 		parent::__construct();
-	} 
+	} # end constructor
 		
 	/*-------------------------------------------------------------------------------------------------
 	Accessed via http://localhost/index/index/
@@ -20,20 +20,9 @@ class index_controller extends base_controller {
 			
 		# Now set the <title> tag
 			$this->template->title = "This is Blooper";
-	
-		# CSS/JS includes
-			/*
-			$client_files_head = Array("");
-	    	$this->template->client_files_head = Utils::load_client_files($client_files);
-	    	
-	    	$client_files_body = Array("");
-	    	$this->template->client_files_body = Utils::load_client_files($client_files_body);   
-	    	*/
 	      					     		
 		# Render the view
 			echo $this->template;
 
-	} # End of method
-	
-	
+	} # End index
 } # End of class

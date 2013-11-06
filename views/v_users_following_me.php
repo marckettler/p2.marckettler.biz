@@ -1,5 +1,11 @@
 <div class="container">
-    <?php foreach($users as $user): ?>
+    <? if(isset($not_following_me)): ?>
+        <h3 class="alert-info text-center">
+            You are not being <?=($bloopify ? "Bloop" : "Follow");?>ed by anyone :(<br>
+            Click <a class="btn btn-sm btn-primary" href="/posts/add">Here</a> and <?=($bloopify ? "Bloop" : "Post");?> something to whine about not being <?=($bloopify ? "Blooped" : "Followed");?>!
+        </h3>
+    <? endif;
+    foreach($users as $user): ?>
         <?php if(isset($following_me[$user['user_id']])): ?>
             <article class="panel panel-default">
                 <div class="page-header">
