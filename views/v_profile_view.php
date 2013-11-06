@@ -15,6 +15,7 @@
                 Last <?=($bloopify ? "Bloop" : "Pro");?>file Edit: <?=Time::display($user_profile['modified'])?><br>
                 <?=($user->user_id==$user_profile['user_id'] ? "You are" : $user_profile['first_name']." is")?> <?=($bloopify ? "Bloop" : "Follow");?>ing <span class="badge"><?=$num_following;?></span> other <?=($bloopify ? "Bloopers" : "Users");?><br>
                 There are <span class="badge"><?=$num_following_me;?></span> <?=($bloopify ? "Bloopers Bloop" : "Users Follow");?>ing <?=($user->user_id==$user_profile['user_id'] ? "you" : $user_profile['first_name'])?><br>
+                <a class="btn btn-sm btn-primary" href="<?=($user->user_id==$user_profile['user_id'] ? '/' : '/users/show_all_users')?>"><span class="glyphicon glyphicon-backward"></span> Go Back</a>
             </p>
         </div>
     </article>
